@@ -394,6 +394,63 @@ async def get_indicator_explanations():
     }
     return explanations
 
+@app.post("/api/data/update")
+async def update_data():
+    """更新股票数据（使用Tushare接口）"""
+    try:
+        from data_fetcher import update_database_with_real_data
+        import threading
+        
+        # 在后台线程中执行数据更新
+        update_thread = threading.Thread(target=update_database_with_real_data)
+        update_thread.start()
+        
+        return {
+            "message": "数据更新已启动",
+            "status": "processing",
+            "note": "这是一个耗时的操作，请稍后检查数据是否更新"
+        }
+    except ImportError:
+        return {
+            "message": "数据更新功能不可用",
+            "status": "error",
+            "note": "请确保已安装所需依赖包"
+        }
+    except Exception as e:
+        logger.error(f"启动数据更新失败: {e}")
+        raise HTTPException(status_code=500, detail="启动数据更新失败")
+
+@app.get("/api/data/status")
+async def get_data_status():
+    """获取数据状态"""
+    try:
+        conn = sqlite3.connect('stock_scoring.db', check_same_thread=False)
+        cursor = conn.cursor()
+        
+        # 获取股票数量
+        cursor.execute("SELECT COUNT(*) FROM stock_info")
+        stock_count = cursor.fetchone()[0]
+        
+        # 获取最新评分日期
+        cursor.execute("SELECT MAX(score_date) FROM score_result")
+        latest_date = cursor.fetchone()[0]
+        
+        # 获取高潜力股票数量
+        cursor.execute("SELECT COUNT(*) FROM score_result WHERE total_score >= 80 AND score_date = (SELECT MAX(score_date) FROM score_result WHERE stock_code = score_result.stock_code)")
+        high_potential_count = cursor.fetchone()[0]
+        
+        conn.close()
+        
+        return {
+            "stock_count": stock_count,
+            "latest_score_date": latest_date,
+            "high_potential_count": high_potential_count,
+            "database_status": "normal"
+        }
+    except Exception as e:
+        logger.error(f"获取数据状态失败: {e}")
+        raise HTTPException(status_code=500, detail="获取数据状态失败")
+
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run(app, host="0.0.0.0", port=8000)
