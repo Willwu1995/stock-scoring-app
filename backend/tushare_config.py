@@ -1,7 +1,7 @@
 # Tushare配置文件
 # 请将您的Tushare Token填入下方
 
-TUSHARE_TOKEN = "0f23d9afb6524ea0dc1af511b91d1840cb5df1d55d6aea63f3920769"
+TUSHARE_TOKEN = "4b6e76d43db0775e95cdf36ddd4d8172e2c34a2e7873be91c72d64e9"
 
 # Tushare Pro API地址
 TUSHARE_API_URL = "http://api.tushare.pro"
