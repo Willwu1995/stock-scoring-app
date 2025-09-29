@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/stock-scoring-app/static/css/main.e6c13ad2.css",
-    "main.js": "/stock-scoring-app/static/js/main.1bab1115.js",
-    "static/js/453.e3d0b047.chunk.js": "/stock-scoring-app/static/js/453.e3d0b047.chunk.js",
-    "index.html": "/stock-scoring-app/index.html",
-    "main.e6c13ad2.css.map": "/stock-scoring-app/static/css/main.e6c13ad2.css.map",
-    "main.1bab1115.js.map": "/stock-scoring-app/static/js/main.1bab1115.js.map",
-    "453.e3d0b047.chunk.js.map": "/stock-scoring-app/static/js/453.e3d0b047.chunk.js.map"
+    "main.css": "./static/css/main.e6c13ad2.css",
+    "main.js": "./static/js/main.c79fdc90.js",
+    "static/js/453.e3d0b047.chunk.js": "./static/js/453.e3d0b047.chunk.js",
+    "index.html": "./index.html",
+    "main.e6c13ad2.css.map": "./static/css/main.e6c13ad2.css.map",
+    "main.c79fdc90.js.map": "./static/js/main.c79fdc90.js.map",
+    "453.e3d0b047.chunk.js.map": "./static/js/453.e3d0b047.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.e6c13ad2.css",
-    "static/js/main.1bab1115.js"
+    "static/js/main.c79fdc90.js"
   ]
 }
